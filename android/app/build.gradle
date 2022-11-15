@@ -1,4 +1,4 @@
-def localProperties = new Properties()
+def localProperties =  Properties()//it was new Properties() and was showing error so removed new keyword
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
@@ -8,8 +8,8 @@ if (localPropertiesFile.exists()) {
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-}
+    throw GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}// removed new keyword from new GradleException
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
@@ -47,7 +47,7 @@ android {
         applicationId "com.example.messapp"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 20//minSdkVersion flutter.minSdkVersion <changed according to package>
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
