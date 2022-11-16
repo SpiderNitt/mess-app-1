@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messapp/views/dashboard_view.dart';
 import 'package:messapp/views/login_view.dart';
 import 'views/scanner_view.dart';
 
