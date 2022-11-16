@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/images/vector.jpg
     - assets/images/Quote.jpg
+    - assets/images/success_tick_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

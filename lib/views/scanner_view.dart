@@ -47,34 +47,125 @@ class _ScanQrPageState extends State<ScanQrPage> {
       });
 
       print(scannedresult);
-      //Show an alert box here ,alert box had issues so Using snackbar temporarily
-
-      showDialog(context: context, builder: (BuildContext context) {
-        return alertDialog('Nitin sucks');
-      });
-/*
-       final snackBar = SnackBar(
-        content:  Text('$scannedresult'),
-        action: SnackBarAction(
-          label: 'Scan next',
-          onPressed: () {
-            // Some code to undo the change.
-            reassemble();
-          },
-        ),
-      );
-
-      // Find the ScaffoldMessenger in the widget tree
-      // and use it to show a SnackBar.
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-*/
-      controller!.dispose();
 
 
-
+    Future.delayed(const Duration(milliseconds: 500), () {
+    showDialog(
+    context: context,
+    builder: (context) => successDialogue()//alertdialogue
+    );//show dialogue
+    });
+      //controller!.dispose();
     }
   }
+
+AlertDialog successDialogue(){
+    return AlertDialog(
+      title: Column
+        (
+        children: [
+          Image.asset('assets/images/success_tick_icon.png'),
+          Text("Success",style: TextStyle(color: Colors.green),)
+        ],),
+      content: SingleChildScrollView(
+        child: Text("Roll no  $scannedresult scanned successfully"),
+      ),
+      actions: <Widget>[Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 8.0,),
+          Expanded(
+            child: ElevatedButton(onPressed: (){
+              Navigator.of(context).pop();//todo:navigate to dashboard !it should go to the dashboard!
+              reassemble();//todo: remove this reassamble line once dashboard page is linked
+                  },
+                child: Text("cancel",style: TextStyle(fontWeight: FontWeight.bold),),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white30),
+
+              ),
+            ),
+          ),
+          SizedBox(width: 8.0,),
+          Expanded(
+            child: ElevatedButton(onPressed: (){
+              Navigator.of(context).pop();
+              reassemble();
+            },
+                child: Text("Scan Next",style:
+                TextStyle(fontWeight: FontWeight.bold,
+                  color: Colors.white
+                ),
+                ),
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.greenAccent),
+              ),
+            ),
+          ),
+          SizedBox(width: 8.0,),
+        ],
+      )],
+    );
+}
+
+  AlertDialog errorDialogue(){
+    return AlertDialog(
+      title: Column
+        (
+        children: [
+          Icon(Icons.error,color: Colors.red,size: 110.0,),
+          Text("Error",style: TextStyle(color: Colors.red),)
+        ],),
+      content: SingleChildScrollView(
+        child: Text("Some Error occured"),
+      ),
+      actions: <Widget>[Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 8.0,),
+          Expanded(
+            child: ElevatedButton(onPressed: (){
+              Navigator.of(context).pop();//todo:navigate to dashboard !it should go to the dashboard!
+              reassemble();//todo: remove this reassamble line once dashboard page is linked
+            },
+              child: Text("cancel",style: TextStyle(fontWeight: FontWeight.bold),),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white30),
+
+              ),
+            ),
+          ),
+          SizedBox(width: 8.0,),
+          Expanded(
+            child: ElevatedButton(onPressed: (){
+              Navigator.of(context).pop();
+              reassemble();
+            },
+              child: Text("Try Again",style:
+              TextStyle(fontWeight: FontWeight.bold,
+                  color: Colors.white
+              ),
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+              ),
+            ),
+          ),
+          SizedBox(width: 8.0,),
+        ],
+      )],
+    );
+  }
+
+
+
+
+
+
+
+
+
+
 
 
   @override
@@ -104,11 +195,14 @@ class _ScanQrPageState extends State<ScanQrPage> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextField(
+                  style: TextStyle(color: Colors.lightBlueAccent,fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                   controller: search,
                   decoration: InputDecoration(
+                    fillColor: Colors.red,
                     labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0))
                     ),
                     labelText: 'Rollno',
                   ),
